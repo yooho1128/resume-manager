@@ -145,7 +145,7 @@ export default function NewCoverLetterPage() {
           <CardContent className="space-y-3">
             <div className="space-y-1.5">
               <Label className="text-slate-400 text-xs">기반 이력서 선택</Label>
-              <Select onValueChange={(v) => setValue('resumeId', v)}>
+              <Select onValueChange={(v) => setValue('resumeId', v as string)}>
                 <SelectTrigger className="bg-slate-900/50 border-slate-700 text-white">
                   <SelectValue placeholder="이력서를 선택해주세요" />
                 </SelectTrigger>

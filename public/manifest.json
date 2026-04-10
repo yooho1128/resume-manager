@@ -1,0 +1,20 @@
+{
+  "name": "이력 관리",
+  "short_name": "이력관리",
+  "description": "AI 기반 이력서 & 자기소개서 관리 앱",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e293b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["productivity", "business"]
+}
