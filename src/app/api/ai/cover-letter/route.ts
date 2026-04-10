@@ -1,0 +1,19 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
+import { generateCoverLetter } from '@/lib/anthropic'
+
+// POST /api/ai/cover-letter - AI 자기소개서 생성
+export async function POST(req: NextRequest) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 })
+
+  const { resumeId, prompt, company, position } = await req.json()
+  if (!resumeId || !prompt) return NextResponse.json({ error: '이력서 ID와 요청 내용이 필요합니다.' }, { status: 400 })
+
+  const { data: resume } = await supabase.from('resumes').select('*').eq('id', resumeId).single()
+  if (!resume) return NextResponse.json({ error: '이력서를 찾을 수 없습니다.' }, { status: 404 })
+
+  const content = await generateCoverLetter(resume, prompt, company, position)
+  return NextResponse.json({ content })
+}
